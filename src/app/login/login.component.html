@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="text-center">
+
+    <img src="assets/gym.jpg" alt="">
+    <h3>Bienvenido por favor ingrese sus datos</h3>
+  </div>
+  <form [formGroup]="form">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp">
+      <div *ngIf="form.controls['email'].invalid && form.controls['email'].dirty" class="alert alert-warning"
+        role="alert">
+        <span *ngIf="form.controls['email'].errors.required">Correo requerido</span>
+        <span *ngIf="form.controls['email'].errors.email">Correo invalido</span>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" (keyUp.enter)="ingresar()" formControlName="password" class="form-control" id="password">
+      <div *ngIf="form.controls['password'].invalid && form.controls['password'].dirty" class="alert alert-warning"
+        role="alert">
+        Contraseña requerida
+      </div>
+    </div>
+
+
+    <button type="submit" (click)="ingresar()" [disabled]="!form.valid" class="btn btn-primary">Ingresar</button>
+  </form>
+
+  <div *ngIf="!correcto" class="alert alert-warning" role="alert">
+    {{textoError}}
+  </div>
+
+
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-atom" [fullScreen]="true">
+    <p style="color: black"> Loading... </p>
+    </ngx-spinner>
+
+</div>

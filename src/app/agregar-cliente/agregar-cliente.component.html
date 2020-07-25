@@ -1,0 +1,97 @@
+<div class="container mt-5">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="">Nombre</label>
+                    <input type="text" class="form-control" placeholder="ingrese su nombre" formControlName="nombre">
+                </div>
+                <div *ngIf="form.controls['nombre'].invalid && form.controls['nombre'].dirty"
+                    class="alert alert-warning" role="alert">
+                    Inserte un nombre
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="">Apellido</label>
+                    <input type="text" class="form-control" placeholder="ingrese su apellido"
+                        formControlName="apellido">
+                </div>
+                <div *ngIf="form.controls['apellido'].invalid && form.controls['apellido'].dirty"
+                    class="alert alert-warning" role="alert">
+                    Inserte un apellido
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="">Correo</label>
+                    <input type="email" class="form-control" placeholder="ingrese su correo" formControlName="correo">
+                </div>
+                <div *ngIf="form.controls['correo'].invalid && form.controls['correo'].dirty"
+                    class="alert alert-warning" role="alert">
+                    <span *ngIf="form.controls['correo'].errors.required">Correo requerido</span>
+                    <span *ngIf="form.controls['correo'].errors.email">Correo invalido</span>
+                </div>
+            </div>
+
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="">Cedula</label>
+                    <input type="text" class="form-control" placeholder="ingrese su cedula" formControlName="cedula">
+                    <div *ngIf="form.controls['cedula'].invalid && form.controls['cedula'].dirty"
+                        class="alert alert-warning" role="alert">
+                        Inserte una ceduila
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="">Fecha nacimiento</label>
+                    <input type="date" class="form-control" placeholder="ingrese su fecha nacimiento"
+                        formControlName="fechaNacimiento">
+                    <div *ngIf="form.controls['fechaNacimiento'].invalid && form.controls['fechaNacimiento'].dirty"
+                        class="alert alert-warning" role="alert">
+                        Inserte una fecha
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="">Telefono</label>
+                    <input type="tel" class="form-control" placeholder="ingrese su telefono" formControlName="telefono">
+                    <div *ngIf="form.controls['telefono'].invalid && form.controls['telefono'].dirty"
+                        class="alert alert-warning" role="alert">
+                        Inserte un telefono
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="">Foto</label>
+                    <input type="file" (change)="subirImagen($event)" class="form-control-file" placeholder="ingrese su foto" formControlName="imgUrl">
+                    <div *ngIf="form.controls['imgUrl'].invalid && form.controls['imgUrl'].dirty"
+                        class="alert alert-warning" role="alert">
+                        Inserte una imagen
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <progressbar [value]="porcentajeSubida" type="success" [striped]="true">{{porcentajeSubida }}%</progressbar>
+            </div>
+        </div>
+        <br>
+        <br>
+        <button class="btn btn-primary" *ngIf="!editable" (click)="agregar()" [disabled]="form.invalid || !imagenSubida">Agregar</button>
+        <button class="btn btn-info" *ngIf="editable" (click)="editar()">Editar</button>
+    </form>
+</div>
